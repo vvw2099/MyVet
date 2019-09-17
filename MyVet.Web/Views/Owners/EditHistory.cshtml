@@ -1,0 +1,25 @@
+﻿@model MyVet.Web.Models.HistoryViewModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Modificar Registro</h2>
+
+<h4>Historial de Mascota</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditHistory">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PetId" />
+            <input type="hidden" asp-for="Id" />
+
+            <partial name="_History" />
+
+            <div class="form-group">
+                <input type="submit" value="Cambiar" class="btn btn-primary" />
+                <a asp-action="DetailsPet" asp-route-id="@Model.PetId" class="btn btn-success">Detalle de Mascota</a>
+            </div>
+        </form>
+    </div>
+</div>
