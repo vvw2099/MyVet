@@ -5,22 +5,22 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="MyVet.Prism.Views.LoginPage"
              Title="{Binding Title}">
-
-    <StackLayout Padding="10">
-        <Label Text="Email"/>
-        <Entry
+    <ScrollView>
+        <StackLayout Padding="10">
+            <Label Text="Email"/>
+            <Entry
             Keyboard="Email"
             Placeholder="Correo Electrónico..."
             Text="{Binding Email}"/>
-        <Label Text="Password"/>
-        <Entry
+            <Label Text="Password"/>
+            <Entry
             IsPassword="True"
             Placeholder="Contraseña"
             Text="{Binding Password}"/>
-        <ActivityIndicator
+            <ActivityIndicator
             VerticalOptions="CenterAndExpand"
             IsRunning="{Binding IsRunning}"/>
-        <Button
+            <Button
             BorderRadius ="23"
             BackgroundColor="Navy"
             IsEnabled="{Binding IsEnabled}"
@@ -29,5 +29,8 @@
             Text="Ingresar"
             TextColor="White"/>
 
-    </StackLayout>
+        </StackLayout>
+    </ScrollView>
+    
+    
 </ContentPage>
