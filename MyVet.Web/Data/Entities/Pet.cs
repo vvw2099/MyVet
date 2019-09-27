@@ -32,7 +32,7 @@ namespace MyVet.Web.Data.Entities
         public string Remarks { get; set; }
 
         //reemplazar la url correcta  por la imagen
-        public string ImageFullPath => string.IsNullOrEmpty(ImageUrl) ? null : $"https://TBD.azurewebsites.net{ImageUrl.Substring(1)}";
+        public string ImageFullPath => string.IsNullOrEmpty(ImageUrl) ? null : $"http://regel.somee.com{ImageUrl.Substring(1)}";
 
         [Display(Name = "Fecha de nacimiento")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]

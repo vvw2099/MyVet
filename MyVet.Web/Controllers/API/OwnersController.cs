@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyVet.Web.Data;
 using MyVet.Common.Models;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace MyVet.Web.Controllers.API
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class OwnersController : ControllerBase
     {
         private readonly DataContext _dataContext;
@@ -35,7 +39,7 @@ namespace MyVet.Web.Controllers.API
                 .Include(o => o.Pets)
                 .ThenInclude(p => p.Histories)
                 .ThenInclude(h => h.ServiceType)
-                .FirstOrDefaultAsync(o => o.user.UserName.ToLower().Equals(emailRequest.Email.ToLower()));
+                .FirstOrDefaultAsync(o => o.user.UserName.ToLower() == (emailRequest.Email.ToLower()));
 
             var response = new OwnerResponse
             {
