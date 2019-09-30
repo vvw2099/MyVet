@@ -6,7 +6,7 @@ namespace MyVet.Prism.ViewModels
 {
     public class PetItemViewModel : PetResponse
     {
-        private INavigationService _navigationService;
+        private readonly INavigationService _navigationService;
         private DelegateCommand _selectPetCommand;
 
         public PetItemViewModel(INavigationService navigationService)
@@ -23,7 +23,7 @@ namespace MyVet.Prism.ViewModels
                 { "pet", this }
             };
 
-            await _navigationService.NavigateAsync("PetPage", parameters);
+            await _navigationService.NavigateAsync("HistoriesPage", parameters);
 
         }
     }

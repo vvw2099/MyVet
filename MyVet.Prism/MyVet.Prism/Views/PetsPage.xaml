@@ -5,6 +5,7 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="MyVet.Prism.Views.PetsPage"
+             BackgroundColor="Silver"
              Title="{Binding Title}">
 
     <ScrollView>
@@ -46,6 +47,16 @@
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="2*"/>
                                         </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
                                         <Label
                                     Grid.Column="0"
                                     Grid.Row="0"
@@ -71,7 +82,9 @@
                                        Grid.Row="2"
                                        Text="{Binding Born,StringFormat='{0:yyyy/MM/dd}'}"/>
                                     </Grid>
-
+                                    <Image
+                                        Grid.Column="2"
+                                        Source="ic_chevron_right"/>
 
                                 </Grid>
 

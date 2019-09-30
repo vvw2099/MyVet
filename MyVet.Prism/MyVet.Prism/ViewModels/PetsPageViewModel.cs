@@ -11,7 +11,7 @@ namespace MyVet.Prism.ViewModels
 {
     public class PetsPageViewModel : ViewModelBase
     {
-        private INavigationService _navigationService;
+        private readonly INavigationService _navigationService;
         private OwnerResponse _owner;
         private ObservableCollection<PetItemViewModel> _pets;
         public PetsPageViewModel(INavigationService navigationService) : base(navigationService)
@@ -19,13 +19,14 @@ namespace MyVet.Prism.ViewModels
             _navigationService = navigationService;
             Title = "Mascotas";
         }
-
+        
         public ObservableCollection<PetItemViewModel> Pets
         {
             get => _pets;
             set => SetProperty(ref _pets, value);
         }
-
+        
+        
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
