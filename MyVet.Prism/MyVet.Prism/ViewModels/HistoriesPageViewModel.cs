@@ -1,4 +1,6 @@
 ﻿using MyVet.Common.Models;
+using MyVet.Common.Helpers;
+using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -18,6 +20,8 @@ namespace MyVet.Prism.ViewModels
         {
             _navigationService = navigationService;
             Title = "Historial";
+            Pet = JsonConvert.DeserializeObject<PetResponse>(Settings.Pet);
+            LoadHistories();
         }
 
         public ObservableCollection<HistoryItemViewModel> Histories
@@ -31,22 +35,18 @@ namespace MyVet.Prism.ViewModels
             set => SetProperty(ref _pet, value);
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        
+        private void LoadHistories()
         {
-            base.OnNavigatedTo(parameters);
-
-            if (parameters.ContainsKey("pet")){
-                Pet = parameters.GetValue<PetResponse>("pet");
-                Title = $"Historial de: {Pet.Name}";
-                Histories = new ObservableCollection<HistoryItemViewModel>(Pet.Histories
-                    .Select(h => new HistoryItemViewModel(_navigationService) {
+            Histories = new ObservableCollection<HistoryItemViewModel>(Pet.Histories
+                    .Select(h => new HistoryItemViewModel(_navigationService)
+                    {
                         Date = h.Date,
                         Description = h.Description,
                         Id = h.Id,
                         Remarks = h.Remarks,
-                        ServiceType =h.ServiceType
+                        ServiceType = h.ServiceType
                     }).ToList());
-            }
         }
     }
 }

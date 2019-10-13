@@ -4,11 +4,15 @@
              xmlns:prism="http://prismlibrary.com"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
+             BackgroundColor="{StaticResource colorBackgroud}"
              x:Class="MyVet.Prism.Views.PetPage"
+             Icon="ic_pets"
              Title="{Binding Title}">
-    <ScrollView>
-        <StackLayout Padding="10">
-            <ffimageloading:CachedImage
+
+    <StackLayout Padding="10">
+        <ScrollView>
+            <StackLayout >
+                <ffimageloading:CachedImage
             Aspect="AspectFit"
             Source="{Binding Pet.ImageUrl}"
             LoadingPlaceholder="LoaderImage"
@@ -19,60 +23,66 @@
             DownsampleToViewSize="True"
             HeightRequest="300"
             WidthRequest="300"/>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <Label
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label
                 Grid.Column="0"
                 Grid.Row="0"
                 Text="Nombre"
                 FontAttributes="Bold"/>
-                <Label
+                    <Label
                 Grid.Column="1"
                 Grid.Row="0"
                 Text="{Binding Pet.Name}"/>
-                <Label
+                    <Label
                 Grid.Column="0"
                 Grid.Row="1"
                 Text="Raza"
                 FontAttributes="Bold"/>
-                <Label Grid.Column="1"
+                    <Label Grid.Column="1"
                 Grid.Row="1"
                 Text="{Binding Pet.Race}"/>
-                <Label Grid.Column="0"
+                    <Label Grid.Column="0"
                 Grid.Row="2"
                 Text="Nacimiento"
                 FontAttributes="Bold"/>
-                <Label Grid.Column="1"
+                    <Label Grid.Column="1"
                 Grid.Row="2"
                 Text="{Binding Pet.Born,StringFormat='{0:yyyy/MM/dd}'}"/>
-                <Label Grid.Column="0"
+                    <Label Grid.Column="0"
                 Grid.Row="3"
                 Text="Tipo Mascota"
                 FontAttributes="Bold"/>
-                <Label Grid.Column="1"
+                    <Label Grid.Column="1"
                 Grid.Row="3"
                 Text="{Binding Pet.PetType}"/>
-                <Label Grid.Column="0"
+                    <Label Grid.Column="0"
                 Grid.Row="4"
                 Text="Comentarios"
                 FontAttributes="Bold"/>
-                <Label Grid.Column="1"
+                    <Label Grid.Column="1"
                 Grid.Row="4"
                 Text="{Binding Pet.Remarks}"/>
-            </Grid>
-        </StackLayout>
-    </ScrollView>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+        <Button
+            Command="{Binding EditPetCommand}"
+            Text="Edit Pet"
+            VerticalOptions="EndAndExpand"/>
+    </StackLayout>
+    
     
     
 </ContentPage>

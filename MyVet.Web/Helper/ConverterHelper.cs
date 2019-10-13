@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿
 using System.Threading.Tasks;
+using MyVet.Common.Models;
 using MyVet.Web.Data;
 using MyVet.Web.Data.Entities;
 using MyVet.Web.Models;
@@ -82,6 +81,43 @@ namespace MyVet.Web.Helper
                 Remarks = history.Remarks,
                 ServiceTypeId = history.ServiceType.Id,
                 ServiceTypes = _combosHelper.GetComboServiceTypes()
+            };
+        }
+
+        public PetResponse ToPetResponse(Pet pet)
+        {
+            if (pet == null)
+            {
+                return null;
+            }
+
+            return new PetResponse
+            {
+                Born = pet.Born,
+                Id = pet.Id,
+                ImageUrl = pet.ImageFullPath,
+                Name = pet.Name,
+                PetType = pet.PetType.Name,
+                Race = pet.Race,
+                Remarks = pet.Remarks
+            };
+        }
+
+        public OwnerResponse ToOwnerResposne(Owner owner)
+        {
+            if (owner == null)
+            {
+                return null;
+            }
+
+            return new OwnerResponse
+            {
+                Address = owner.user.Address,
+                Document = owner.user.Document,
+                Email = owner.user.Email,
+                FirstName = owner.user.FirstName,
+                LastName = owner.user.LastName,
+                PhoneNumber = owner.user.PhoneNumber
             };
         }
     }

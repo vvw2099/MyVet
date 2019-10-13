@@ -1,11 +1,12 @@
 ﻿using MyVet.Common.Models;
 using MyVet.Common.Services;
+using MyVet.Common.Helpers;
+using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+
 
 namespace MyVet.Prism.ViewModels
 {
@@ -17,18 +18,26 @@ namespace MyVet.Prism.ViewModels
         private bool _isRunning;
         private bool _IsEnabled;
         private DelegateCommand _loginCommand;
+        private DelegateCommand _registerCommand;
+        private DelegateCommand _forgotPasswordCommand;
 
+        
         public LoginPageViewModel(INavigationService navigationService, IApiService apiService) : base(navigationService)
         {
-            Title = "Login";
+            Title = "VETERINARIA ZULU";
             IsEnabled = true;
+            IsRemember = true;
             _apiService = apiService;
             _navigationService = navigationService;
         }
 
+        public DelegateCommand ForgotPasswordCommand => _forgotPasswordCommand ?? (_forgotPasswordCommand = new DelegateCommand(ForgotPassword));
+
         public DelegateCommand LoginCommand => _loginCommand ?? (_loginCommand = new DelegateCommand(Login));
 
-        
+        public DelegateCommand RegisterCommand => _registerCommand ?? (_registerCommand = new DelegateCommand(Register));
+
+        public bool IsRemember { get; set; }
 
         public string Email { get; set; }
         public string Password
@@ -46,7 +55,7 @@ namespace MyVet.Prism.ViewModels
             get => _IsEnabled;
             set => SetProperty(ref _IsEnabled, value);
         }
-
+        
         private async void Login()
         {
             if (string.IsNullOrEmpty(Email))
@@ -69,6 +78,7 @@ namespace MyVet.Prism.ViewModels
             {
                 IsEnabled = true;
                 IsRunning = false;
+                
                 await App.Current.MainPage.DisplayAlert("Error de Conexion", "No se pudo conectar a la Web","Aceptar");
                 return;
             }
@@ -105,16 +115,26 @@ namespace MyVet.Prism.ViewModels
             }
 
             var owner = response2.Result;
-            var parameters = new NavigationParameters
-            {
-                {"owner", owner }
-            };
+
+            Settings.Owner = JsonConvert.SerializeObject(owner);
+            Settings.Token = JsonConvert.SerializeObject(token);
+            Settings.IsRemembered = IsRemember;
 
             IsRunning = false;
             IsEnabled = true;
                                     
-            await _navigationService.NavigateAsync("PetsPage", parameters);
+            await _navigationService.NavigateAsync("/VeterinaryMasterDetailPage/NavigationPage/PetsPage");
             Password = string.Empty;
+        }
+
+        private async void Register()
+        {
+            await _navigationService.NavigateAsync("RegisterPage");
+        }
+
+        private async void ForgotPassword()
+        {
+            await _navigationService.NavigateAsync("RememberPasswordPage");
         }
     }
 }

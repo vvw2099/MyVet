@@ -3,11 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             BackgroundColor="{StaticResource colorBackgroud}"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="MyVet.Prism.Views.PetsPage"
-             BackgroundColor="Silver"
              Title="{Binding Title}">
 
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="ic_action_add_circle" Command="{Binding AddPetCommand}"/>
+    </ContentPage.ToolbarItems>
     <ScrollView>
         <StackLayout Padding="10">
             <ListView

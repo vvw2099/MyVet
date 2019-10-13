@@ -22,15 +22,17 @@ namespace MyVet.Web.Controllers
         private readonly ICombosHelper _combosHelper;
         private readonly IConverterHelper _converterHelper;
         private readonly IImageHelper _imageHelper;
+        private readonly IMailHelper _mailHelper;
 
         public OwnersController(DataContext context, IUserHelper userHelper,ICombosHelper combosHelper,
-            IConverterHelper converterHelper, IImageHelper imageHelper)
+            IConverterHelper converterHelper, IImageHelper imageHelper,IMailHelper mailHelper)
         {
             _context = context;
             _userHelper = userHelper;
             _combosHelper = combosHelper;
             _converterHelper = converterHelper;
             _imageHelper = imageHelper;
+            _mailHelper = mailHelper;
         }
 
         // GET: Owners
@@ -105,6 +107,17 @@ namespace MyVet.Web.Controllers
                     try
                     {
                         await _context.SaveChangesAsync();
+
+                        var myToken = await _userHelper.GenerateEmailConfirmationTokenAsync(user);
+                        var tokenLink = Url.Action("ConfirmEmail","Account",new { 
+                            userId = user.Id,
+                            token = myToken
+                        },protocol: HttpContext.Request.Scheme);
+
+                        _mailHelper.SendMail(model.Username,"Email confirmation",$"<h1>Confirmación de Correo</h1>"+
+                            $"To allow the user, " +
+                            $"plase click in this link:</br></br><a href = \"{tokenLink}\">Confirmar Correo</a>");
+
                         return RedirectToAction(nameof(Index));
                     }
                     catch(Exception ex)

@@ -1,35 +1,83 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="MyVet.Prism.Views.LoginPage"
+             BackgroundColor="{StaticResource colorBackground}"
              Title="{Binding Title}">
     <ScrollView>
-        <StackLayout Padding="10">
-            <Label Text="Email"/>
-            <Entry
+        <AbsoluteLayout>
+            <StackLayout 
+                Padding="10"
+                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                AbsoluteLayout.LayoutFlags="All">
+                
+                <Image
+                HeightRequest="150"
+                Source="Myvet"/>
+                <Label Text="Email"/>
+                <Entry
             Keyboard="Email"
             Placeholder="Correo Electrónico..."
             Text="{Binding Email}"/>
-            <Label Text="Password"/>
-            <Entry
+                <Label Text="Password"/>
+                <Entry
             IsPassword="True"
             Placeholder="Contraseña"
             Text="{Binding Password}"/>
-            <ActivityIndicator
-            VerticalOptions="CenterAndExpand"
-            IsRunning="{Binding IsRunning}"/>
-            <Button
-            BorderRadius ="23"
-            BackgroundColor="Navy"
-            IsEnabled="{Binding IsEnabled}"
-            Command="{Binding LoginCommand}"
-            HeightRequest="46"
-            Text="Ingresar"
-            TextColor="White"/>
 
-        </StackLayout>
+                <StackLayout
+                    HorizontalOptions="Center"
+                    Orientation="Horizontal">
+                    <Label
+                        Text="Remember me in this device"
+                        VerticalOptions="Center"/>
+                    
+                    <Switch 
+                        IsToggled="{Binding IsRemember}"/>
+                </StackLayout>
+                <Label
+                    HorizontalOptions="Center"
+                    Text="Forgot your password?"
+                    TextColor="{StaticResource colorAccent}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ForgotPasswordCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <StackLayout
+                    Orientation="Horizontal"
+                    VerticalOptions="EndAndExpand">
+                    <Button
+                        IsEnabled="{Binding IsEnabled}"
+                        Command="{Binding LoginCommand}"
+                        Text="Login"/>
+                    <Button
+                        IsEnabled="{Binding IsEnabled}"
+                        Command="{Binding RegisterCommand}"
+                        Style="{StaticResource secondaryButton}"
+                        Text="Register"/>
+                </StackLayout>
+            </StackLayout>
+
+            <ActivityIndicator
+                
+                    AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                    AbsoluteLayout.LayoutFlags="All"
+                    HeightRequest="150"
+                    WidthRequest="150"
+                    IsRunning="{Binding IsRunning}"
+                    IsVisible="{Binding IsRunning}"
+                    BackgroundColor="{StaticResource colorDanger}"
+                    HorizontalOptions="Center"
+                
+                VerticalOptions="Center"
+                 />
+
+
+        </AbsoluteLayout>
+        
     </ScrollView>
     
     

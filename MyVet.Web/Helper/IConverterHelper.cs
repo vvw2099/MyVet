@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using MyVet.Common.Models;
 using System.Threading.Tasks;
 using MyVet.Web.Data.Entities;
 using MyVet.Web.Models;
@@ -16,5 +14,8 @@ namespace MyVet.Web.Helper
         Task<History> ToHistoryAsync(HistoryViewModel model, bool isnew);
 
         HistoryViewModel ToHistoryViewModel(History history);
+        PetResponse ToPetResponse(Pet pet);
+
+        OwnerResponse ToOwnerResposne(Owner owner);
     }
 }

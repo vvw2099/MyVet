@@ -1,18 +1,48 @@
 ﻿@model MyVet.Web.Data.Entities.Manager
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles";
 }
 
-<h2>Details</h2>
+<h2>Administradores</h2>
 
 <div>
-    <h4>Manager</h4>
+    <h4>Información del Usuario</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.user.Document)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.user.Document)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.user.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.user.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.user.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.user.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.user.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.user.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.user.PhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.user.PhoneNumber)
+        </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Cambiar</a> |
+    <a asp-action="Index" class="btn btn-success">Administradores</a>
 </div>
